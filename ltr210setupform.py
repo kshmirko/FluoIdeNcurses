@@ -62,8 +62,8 @@ class Ltr210SetupForm(npyscreen.ActionPopup):
         config = []
         config.append("SYNC MODE: %d\n"%(self.sync_mode.value[0]))
         config.append("FLAGS: 3\n")
-        config.append("HISTORY TIME (mks): %d\n"%(int(self.hist_time.value)))
-        config.append("MEASUREMENTS TIME (mks): %d\n"%(int(self.meas_time.value)))
+        config.append("HISTORY TIME (mks): %.2f\n"%(float(self.hist_time.value)))
+        config.append("MEASUREMENTS TIME (mks): %.2f\n"%(float(self.meas_time.value)))
         config.append("FREQUENCY: %d Hz\n"%(int(self.frequency.value)))
         config.append("MEAS ZERO OFFSET: %d\n"%(self.meas_zero.value[0]))
         config.append("REQUIRED BLOCKS: %d\n"%(int(self.num_blocks.value)))
