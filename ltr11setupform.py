@@ -2,7 +2,7 @@ import npyscreen
 import ListBox as listbox
 
 class NewChannelWidget(npyscreen.ActionPopup):
-    DEFAULT_LINES=20
+    DEFAULT_LINES=15
     def __init__(self):
         super(NewChannelWidget, self).__init__(name='Настройка канала')
         

@@ -19,6 +19,7 @@ class SelectOne(multiline.MultiLine):
 
     def h_select(self, ch):
         self.value = [self.cursor_line,]
+	
 
     def _print_line(self, line, value_indexer):
         try:
