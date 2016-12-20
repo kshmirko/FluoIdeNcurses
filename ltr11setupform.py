@@ -91,7 +91,7 @@ class Ltr11SetupForm(npyscreen.ActionPopup):
             config.append('%s\n'%channels[i])
         config.append('MEASUREMENTS TIME (mks): %.2f\n'%float(self.meas_time.value))
         config.append('REQUIRED BLOCKS : %d\n'%int(self.num_blocks.value))
-        with open('ltr11.config','wt') as txt:
+        with open('config.ltr11','wt') as txt:
             txt.writelines(config)
         
             

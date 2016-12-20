@@ -6,16 +6,9 @@ from ltr210setupform import Ltr210SetupForm
 from configdevicespathsform import ConfigDevicesPathsForm
 from controlpanel import ControlPanel
 from FluorimeterSerialDevice import FluoDevice
-
-MAIN_FORM = 'MAIN'
-BIND_DEVICES_FORM = 'BINDDEV'
-CONFIG_FLUO_FORM = 'CONFFLUO'
-CONFIG_LTR11_FORM = 'CONFLTR11'
-CONFIG_LTR210_FORM = 'CONFLTR210'
-TEST_PANEL_FORM = 'TESTPANEL'
+from consts import *
 
 
- 
 class MainApp(npyscreen.NPSAppManaged):
     def onStart(self):
         self.FluoDev = FluoDevice()
@@ -62,59 +55,9 @@ class FluoForm(npyscreen.FormWithMenus):
             ('Запуск панели управления...', self.whenLaunchControllPanelCB, '1'),
             
         ])
+       
         
-        self.add_handlers({
-            "^L": self.connect_fluo,
-            
-            "a": self.send_char_led,
-            "s": self.send_char_led,
-            "d": self.send_char_led,
-            "f": self.send_char_led,
-            "g": self.send_char_led,
-            "h": self.send_char_led,
-            "j": self.send_char_led,
-            "k": self.send_char_led,
-            
-            "z": self.send_char,
-            "x": self.send_char,
-            "c": self.send_char,
-            "v": self.send_char,
-            "b": self.send_char,
-            "n": self.send_char,
-            "m": self.send_char,
-            "q": self.send_char,
-            
-            "w": self.send_char,
-            "e": self.send_char,
-            
-            
-        })
-        
-    def connect_fluo(self, *argfs, **kwargs):
-        cfg=self.parentApp.getForm(BIND_DEVICES_FORM)
-        fluoport = cfg.devfluo.value
-        
-        if not self.parentApp.FluoDev.isOpen():
-            self.parentApp.FluoDev.port = fluoport
-            self.parentApp.FluoDev.baudrate = 9600
-            self.parentApp.FluoDev.open()
-            
-            if self.parentApp.FluoDev.isOpen():
-                v = self.parentApp.FluoDev.initialize()
-                npyscreen.notify_confirm(v.decode('utf-8'), \
-                    title="Message", form_color='STANDOUT')
-        else:
-            self.parentApp.FluoDev.close()
-        
-    def send_char(self, ch):
-        v=self.parentApp.FluoDev.send_char(chr(ch))
-        npyscreen.notify_confirm(v.decode('ascii'), \
-                    title="Message", form_color='STANDOUT')
-                    
-    def send_char_led(self, ch):
-        v=self.parentApp.FluoDev.send_char_led(chr(ch))
-        npyscreen.notify_confirm(v.decode('ascii'), \
-                    title="Message", form_color='STANDOUT')
+    
         
     def exit_app(self):
         self.parentApp.setNextForm(None)

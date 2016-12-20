@@ -74,7 +74,7 @@ class Ltr210SetupForm(npyscreen.ActionPopup):
         config.append("CH[1].Range: %d\n"%(self.ch2_range.value[0]))
         config.append("CH[1].Mode: %d\n"%(self.ch2_mode.value[0]))
         config.append("FRAME FREQ: %d Hz\n"%(int(self.frame_freq.value)))
-        with open('ltr210.config','wt') as txt:
+        with open('config.ltr210','wt') as txt:
             txt.writelines(config)
         return
        
